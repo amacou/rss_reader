@@ -2,7 +2,7 @@
 
 rss_reader is simple rss reader web app
 
-* How to start
+=How to start
 1. install mysql
 
 2. run "bundle exec rake db:migration" command
@@ -12,21 +12,29 @@ rss_reader is simple rss reader web app
 4. import rss feeds
 
 
-* How to use
-reader page commands
+=How to use
+"/reader" page commands
 
 "j" is scroll to next post
+
 "k" is scroll to prev post
+
 "n" is scroll down
+
 "p" is scroll up
 
-* licence
+=Licence
 ----------
 Copyright &copy; 2013 amacou
+
 Licensed under the [Apache License, Version 2.0][Apache]
+
 Distributed under the [MIT License][mit].
+
 Dual licensed under the [MIT license][MIT] and [GPL license][GPL].
 
 [Apache]: http://www.apache.org/licenses/LICENSE-2.0
+
 [MIT]: http://www.opensource.org/licenses/mit-license.php
+
 [GPL]: http://www.gnu.org/licenses/gpl.html
