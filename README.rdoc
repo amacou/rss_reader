@@ -1,28 +1,32 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+rss_reader is simple rss reader web app
 
-Things you may want to cover:
+* How to start
+1. install mysql
 
-* Ruby version
+2. run "bundle exec rake db:migration" command
 
-* System dependencies
+3. add tasks to cron command, run "whenever -w"
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+4. import rss feeds
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* How to use
+reader page commands
+
+"j" is scroll to next post
+"k" is scroll to prev post
+"n" is scroll down
+"p" is scroll up
+
+* licence
+----------
+Copyright &copy; 2013 amacou
+Licensed under the [Apache License, Version 2.0][Apache]
+Distributed under the [MIT License][mit].
+Dual licensed under the [MIT license][MIT] and [GPL license][GPL].
+
+[Apache]: http://www.apache.org/licenses/LICENSE-2.0
+[MIT]: http://www.opensource.org/licenses/mit-license.php
+[GPL]: http://www.gnu.org/licenses/gpl.html
