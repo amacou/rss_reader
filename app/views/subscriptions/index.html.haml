@@ -1,0 +1,66 @@
+#subscriptions
+%ul.tab
+  %li
+    = link_to t('Subscriptions'), subscriptions_path, class: "red active"
+  %li
+    = link_to t('Folders'), folders_path, class:"blue"
+  %li
+    = link_to t('Import_Export'), import_feeds_path, class:"green"
+#tool
+  .tool-inner
+    %label{for: "subscription-filter"} Folder
+    %select#subscription-filter
+      %option{:value => "all"}
+        = t('All')
+      - @folders.each do |folder|
+        - if folder.id == params[:folder].to_i
+          %option{:value => "#{folder.id}", :selected => "selected"}
+            = folder.name
+        - else
+          %option{:value => "#{folder.id}"}
+            = folder.name
+
+  .tool-inner
+    = form_tag('/subscriptions/change_folder', method: 'POST', class: "subscriptions-change-folder") do
+      #selected_count
+      %span
+        =raw t('selected')
+      = t('change-folder-to')
+      %select#change-folder{:name => "change_folder_to"}
+        %option{:value => "no-folder"}
+          = raw t('no-folder')
+          - @folders.each do |folder|
+            - unless folder.id == params[:folder].to_i
+              %option{:value => "#{folder.id}"}
+                = folder.name
+      = submit_tag t("submit")
+    or
+    = form_tag('/subscriptions/unsubscribe', method: 'POST', class: "subscriptions-unsubscribe") do
+      = submit_tag t("unsubscribe")
+  .tool-inner
+    = form_tag('/subscriptions/subscribe', method: 'POST', class: "subscriptions-subscribe") do
+      = text_field_tag "url", nil, :placeholder => "Enter Site URL"
+      = submit_tag t("subscribe")
+
+%table
+  %tr
+    %th
+      %label.checkbox{for:"checkboxall"}
+        %input#checkboxall{ type:"checkbox"}
+    %th Title
+    %th URL
+    %th Folder
+    %th
+  - @subscriptions.each do |subscription|
+    %tr.subscription
+      %td.select
+        %label.checkbox{for:"checkbox#{subscription.id}"}
+          %input.subscription-check{:id => "checkbox#{subscription.id}", :type => "checkbox", 'data-subscription-id' => "#{subscription.id}"}
+      %td= subscription.feed.title
+      %td= link_to subscription.feed.url, subscription.feed.url, {:target => "_blank"}
+      %td= subscription.folder.name if subscription.folder
+
+      %td= link_to 'Destroy', subscription, :method => :delete, :data => { :confirm => t('delete-confirm') }
+
+
+= paginate @subscriptions

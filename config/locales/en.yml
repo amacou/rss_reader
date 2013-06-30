@@ -1,0 +1,55 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  here : "Here"
+  welcome: "Welcome, "
+  home: "Home"
+  setting: "Setting"
+  subscriptions: "Subscriptions"
+  sign_out: "Sign out"
+  unread: "unread"
+  entry: "entry"
+  import_feed: "Import Subscription Feeds"
+  export_feed: "Export Subscription Feeds"
+  sign_in_with_twitter: "Sign in with Twitter"
+  noting_subscriptions: "You should subscription feed first"
+  noting_unread_entries: "Your reading list has no unread entries (*ﾟ▽ﾟ)ﾉ"
+  new-folder: 'New Folder'
+  name: 'Name'
+  delete-confirm: 'Are you sure?'
+  submit: "Submit"
+  delete-subscriptions: "Delete Subsctiptions"
+  change-folder: "Change Folder"
+  change-folder-to: "Move To"
+  no-folder: "No Folder"
+  actions: "Actions..."
+  unsubscribe: "Unsubscribe"
+  subscribe: "Subscribe"
+  bookmarklet: "Bookmarklet"
+  activerecord:
+    models:
+      user: User
+    attributes:
+      user:
+        sort_type: "Sort by"
+        sort_type_desc: "newest first"
+        sort_type_asc: "oldest first"

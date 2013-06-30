@@ -1,0 +1,82 @@
+<% class SubscriptionsHelper; include AbstractController::Translation end %>
+<%= helper = SubscriptionsHelper.new %>
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+inplace_edit_start = ->
+  $('.rest-in-place-edit').restInPlace()
+
+
+change_folder_button_init = ->
+  change_folder_button = $('form.subscriptions-change-folder input[type=submit]')
+  change_folder_button.attr("disabled", null)
+
+  change_folder_button.click(->
+    $("input.subscription-check:checked").each( (index,input)->
+      form = $('form.subscriptions-change-folder')
+      $('.change_folder_target').remove()
+      $("input.subscription-check:checked").each( (index,input)->
+        input = $("<input type='hidden' class='change_folder_target' name='subscriptions[]' value='#{$(input).attr('data-subscription-id')}'> ")
+        form.append(input)
+      )
+      change_folder_button.attr("disabled", "disabled")
+    )
+    return true
+  )
+
+unsubscribe_button_init = ->
+  unsubscribe_button = $('form.subscriptions-unsubscribe input[type=submit]')
+  unsubscribe_button.attr("disabled", null)
+
+  unsubscribe_button.click( ->
+    if confirm('<%= helper.t('delete-confirm') %>')
+      form = $('form.subscriptions-unsubscribe')
+      $('.unsubscribe_target').remove()
+      $("input.subscription-check:checked").each( (index,input)->
+        input = $("<input type='hidden' class='unsubscribe_target' name='subscriptions[]' value='#{$(input).attr('data-subscription-id')}'> ")
+        form.append(input)
+      )
+      unsubscribe_button.attr("disabled", "disabled")
+
+      return true
+    else
+      return false
+  )
+
+folder_filter = ->
+  $("#subscription-filter").on("change", ->
+    elem = $(this).find("option:selected")
+    unless elem.val() == "new"
+      url = "/subscriptions"
+      if elem.val() != "all"
+        url = "#{url}?folder=#{elem.val()}";
+      Turbolinks.visit(url)
+#      window.location = url
+  )
+
+toggle_check_all = ->
+  $("#checkboxall").on("change", ->
+    $(".subscription-check").prop("checked", $(this).is(":checked"))
+    update_check_count();
+    return false
+  )
+  $("input.subscription-check").on("change", ->
+    update_check_count();
+    return false;
+  )
+
+update_check_count = ->
+  selected_count = $("input.subscription-check:checked").length
+  $("#selected_count").text(selected_count);
+
+
+$.subscriptions_ready = ->
+  unless  $('#subscriptions').length > 0
+    return true
+
+  folder_filter();
+  toggle_check_all();
+  update_check_count()
+  change_folder_button_init();
+  unsubscribe_button_init()
+  inplace_edit_start();

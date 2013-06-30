@@ -1,0 +1,20 @@
+%ul.tab
+  %li
+    = link_to t('Subscriptions'), subscriptions_path, class: "red"
+  %li
+    = link_to t('Folders'), folders_path, class:"blue active"
+
+
+
+= link_to t('new-folder'), new_folder_path
+%table
+  %tr
+    %th= t('Name')
+    %th
+
+  - @folders.each do |folder|
+
+    %tr
+      %td.rest-in-place-edit{'data-url' => "/folders/#{folder.id}", 'data-object' => "folder", 'data-attribute' => "name", 'data-formtype' => 'input'}
+        = folder.name
+      %td= link_to 'Destroy', folder, :method => :delete, :data => { :confirm => t('delete-confirm') }

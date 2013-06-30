@@ -1,0 +1,9 @@
+#entries
+  - @entries.each do |entry|
+    = render :partial => "entry", :locals => {entry: entry}
+- if @entries.length > 0
+  = link_to "Next", "/reader?t=#{@entries.last.weight}", :rel => "next", :id => "next-link" if @entries.length == 20
+- elsif current_user.subscriptions.count == 0
+  = t('noting_subscriptions')
+- else
+  = t('noting_unread_entries')

@@ -1,0 +1,11 @@
+%div
+  %h2= t('import_feed')
+  = form_tag(upload_feeds_path,:multipart => true) do
+    = file_field_tag "opml"
+    = submit_tag "import"
+%div
+  %h2= t('export_feed')
+  = link_to t('export_feed'), export_feeds_path
+%div
+  %h2= t('bookmarklet')
+= link_to "BookMarklet", "javascript:location.href='http://#{}/subscribe/'+location.href"

@@ -1,0 +1,20 @@
+.entry{"data-entry-id" => "#{entry.id}"}
+  .entry-title
+    = link_to entry.title, entry.link, target: "_blank"
+  .entry-source
+    = link_to entry.feed.title, entry.feed.url, target: "_blank"
+  .entry-author
+    = entry.author
+  %time.entry-published.timeago{:datetime => "#{entry.published_date}"}
+  .entry-content
+    =raw entry.description
+-# .entry{"data-entry-id" => "#{entry.id}"}
+-#   .entry-title
+-#     = link_to entry.entry.title, entry.entry.link, target: "_blank"
+-#   .entry-source
+-#     = link_to entry.entry.feed.title, entry.entry.feed.url, target: "_blank"
+-#   .entry-author
+-#     = entry.entry.author
+-#   %time.entry-published.timeago{:datetime => "#{entry.entry.published_date}"}
+-#   .entry-content
+-#     =raw entry.entry.description

@@ -1,0 +1,23 @@
+#topbar
+  .topbar-inner
+    %h1.logo
+      - if current_user
+        = link_to image_tag("logo.png", :class => "logo", :alt => "RSS Reader"), "/reader"
+      - else
+        = link_to image_tag("logo.png", :class => "logo", :alt => "RSS Reader"), "/"
+    #user-nav
+      - if current_user
+        =raw t('welcome')
+        = "#{ current_user.name }"
+        |
+        = link_to t('home'), '/reader'
+        |
+        = link_to t('setting'), setting_path
+        |
+        = link_to t('subscriptions'), subscriptions_path
+        |
+        = link_to t('sign_out'), signout_path, :method => :delete
+        |
+      - else
+        = link_to t("sign_in_with_twitter"), "/auth/twitter"
+        = link_to t("sign_in_with_facebook"), "/auth/facebook"

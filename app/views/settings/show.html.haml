@@ -1,0 +1,8 @@
+= form_for current_user, :url => setting_update_path do |f|
+  = f.label :sort_type
+  = f.radio_button :sort_type, User::SORT_TYPE_DESC
+  = f.label :sort_type_desc
+  = f.radio_button :sort_type, User::SORT_TYPE_ASC
+  = f.label :sort_type_asc
+
+  = f.submit :update
