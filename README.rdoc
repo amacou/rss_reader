@@ -5,11 +5,13 @@ rss_reader is simple rss reader web app
 =How to start
 1. install mysql
 
-2. run "bundle exec rake db:migration" command
+2. create config/database.yml
 
-3. add tasks to cron command, run "whenever -w"
+3. run "bundle exec rake db:migration" command
 
-4. import rss feeds
+4. add tasks to cron command, run "whenever -w"
+
+5. import rss feeds
 
 
 =How to use
@@ -22,6 +24,8 @@ rss_reader is simple rss reader web app
 "n" is scroll down
 
 "p" is scroll up
+
+"v" is open page to new tab
 
 =Licence
 ----------
