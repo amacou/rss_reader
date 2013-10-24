@@ -21,6 +21,8 @@
 
 #set :output, "/path/to/my/cron_log.log"
 job_type :rbenv_bundle_runner, "export PATH=\"$HOME/.rbenv/bin:$PATH\"; eval \"$(rbenv init -)\"; cd :path && bundle exec rails runner -e :environment ':task' :output"
+job_type :rvm_bundle_runner, "source \"$HOME/.rvm/scripts/rvm\" && rvm use 2.0 && cd :path && bundle exec rails runner -e :environment ':task' :output"
+
 
 set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
 

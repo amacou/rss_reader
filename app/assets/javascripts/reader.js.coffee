@@ -20,8 +20,11 @@ start_key_listen = ->
     switch e.keyCode
       when 86
       #v
+        os_is_not_windows = navigator.platform.indexOf("Win") == -1
         link = active_entry.find('.entry-title a')
-        window.open(link.attr('href'));
+        mouse_event = document.createEvent("MouseEvents")
+        mouse_event.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, !os_is_not_windows, false, false, os_is_not_windows, 0, null)
+        link[0].dispatchEvent(mouse_event) if link.length > 0
       when 74
         #j
         if active_entry.length == 0

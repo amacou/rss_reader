@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20130429081743) do
     t.integer  "skip_count",       default: 0
   end
 
-  add_index "feeds", ["xml_url"], name: "index_feeds_on_xml_url"
+  add_index "feeds", ["xml_url"], name: "index_feeds_on_xml_url", using: :btree
 
   create_table "folders", force: true do |t|
     t.integer  "user_id"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20130429081743) do
     t.datetime "updated_at"
   end
 
-  add_index "folders", ["user_id"], name: "index_folders_on_user_id"
+  add_index "folders", ["user_id"], name: "index_folders_on_user_id", using: :btree
 
   create_table "subscriptions", force: true do |t|
     t.integer  "user_id"
@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(version: 20130429081743) do
     t.datetime "updated_at"
   end
 
-  add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id"
-  add_index "subscriptions", ["folder_id"], name: "index_subscriptions_on_folder_id"
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
+  add_index "subscriptions", ["feed_id"], name: "index_subscriptions_on_feed_id", using: :btree
+  add_index "subscriptions", ["folder_id"], name: "index_subscriptions_on_folder_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "unread_entries", force: true do |t|
     t.integer  "user_id"
@@ -72,9 +72,9 @@ ActiveRecord::Schema.define(version: 20130429081743) do
     t.string   "weight"
   end
 
-  add_index "unread_entries", ["entry_id"], name: "index_unread_entries_on_entry_id"
-  add_index "unread_entries", ["subscription_id"], name: "index_unread_entries_on_subscription_id"
-  add_index "unread_entries", ["user_id"], name: "index_unread_entries_on_user_id"
+  add_index "unread_entries", ["entry_id"], name: "index_unread_entries_on_entry_id", using: :btree
+  add_index "unread_entries", ["subscription_id"], name: "index_unread_entries_on_subscription_id", using: :btree
+  add_index "unread_entries", ["user_id"], name: "index_unread_entries_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider"
