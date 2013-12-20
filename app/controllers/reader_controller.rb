@@ -15,7 +15,7 @@ class ReaderController < ApplicationController
   end
 
   def readed
-    UnreadEntry.where(user_id: current_user.id, entry_id: params[:id]).limit(1).update_all(readed: true)
+    #    UnreadEntry.where(user_id: current_user.id, entry_id: params[:id]).limit(1).update_all(readed: true)
     render :nothing => true
   end
 end

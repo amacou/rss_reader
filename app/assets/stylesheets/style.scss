@@ -22,12 +22,20 @@ $color-asbestos: #7f8c8d;
 $color-link: #3333FF;
 $color-link-visited: #551A8B;
 $color-entry-border: $color-midnightblue;
+
+$smartphone: "only screen and (max-width : 900px)";
+$mobile-font-scale: 95%;
 html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
 body{
+    -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -o-text-size-adjust: 100%;
+  text-size-adjust: 100%;
     /* font-size:16px; */
     /* line-height:20px; */
 }
@@ -62,6 +70,10 @@ a{
     color:$color-link;
     &:hover { color: $color-link;}
     &:visited{color: $color-link-visited;}
+}
+img{
+    max-width: 100%;
+    height: auto;
 }
 #wide-container{
     width: 900px;
@@ -288,4 +300,91 @@ ul.tab {
           }
       }
   }
+}
+
+#controll-bar{
+display:none;
+}
+@media #{$smartphone} {
+#controll-bar{
+  display:block;
+  /* float:right; */
+  position:fixed;
+  right:0px;
+  top:0px;
+  /* bottom:0px; */
+  /* right:0px; */
+  @include display-box;
+  @include box-orient(horizontal);
+  @include box-align(stretch);
+  @include box-direction(reverse);  display: flex;
+  background-color:#1DA075;
+  @include opacity(0.8);
+  width:100%;
+}
+.controll-button{
+  min-width: 40px;
+  min-height:40px;
+  margin:0 5px;
+  text-align:center;
+  @include box-flex(1);
+  i{
+    margin-top:5px;
+  }
+}
+#wide-container{
+    width: auto;
+}
+#topbar{
+    img.logo{
+    }
+    #user-nav{
+        display:none;
+        float: left;
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        margin-right:10px;
+    }
+}
+#float-topbox{
+    #paging-status{
+    }
+    .notice{
+        width: auto;
+        margin: 0 auto;
+    }
+}
+h1,h2,h3,h4,h5,h6{
+font-size:$mobile-font-scale;
+}
+#entries{
+    .entry{
+        .entry-title{
+            font-size: $mobile-font-scale;
+            /* font-size:16px; */
+            /* line-height:20px; */
+        }
+        .entry-published, .entry-source, .entry-author{
+            /* font-size:16px; */
+            font-size:$mobile-font-scale;
+            /* line-height:20px; */
+        }
+        &.active{
+            .entry-title{
+                font-size:$mobile-font-scale;
+                /* font-size:20px; */
+            }
+            .entry-content{
+                font-size:$mobile-font-scale;
+                *{
+                  font-size:$mobile-font-scale;
+                  /* font-size:14px; */
+                  /* line-height:18px; */
+                }
+            }
+        }
+    }
+}
+
 }
