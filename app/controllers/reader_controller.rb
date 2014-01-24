@@ -6,10 +6,11 @@ class ReaderController < ApplicationController
     prev_weight = params[:t]
     @entries = Entry.joins(:unread_entries).where(['unread_entries.user_id=?',current_user.id]).where(['unread_entries.readed=?',false]).includes(:feed).order("unread_entries.weight #{current_user.sort_type}")
     if prev_weight
-      @entries = @entries.where(['unread_entries.weight > ? ',prev_weight])
-    else
-      puts "Params" + "*" * 20
-      puts prev_weight
+      if current_user.sort_type == User::SORT_TYPE_DESC
+        @entries = @entries.where(['unread_entries.weight < ? ',prev_weight])
+      else
+        @entries = @entries.where(['unread_entries.weight > ? ',prev_weight])
+      end
     end
     @entries = @entries.page(1).per(20)
   end
