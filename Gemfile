@@ -5,10 +5,10 @@ gem 'rails'
 gem 'mysql2'
 
 group :assets do
-  gem 'sprockets-rails', github: 'rails/sprockets-rails'
-  gem 'sass-rails',   github: 'rails/sass-rails'
-  gem 'coffee-rails', github: 'rails/coffee-rails'
-  gem 'compass-rails'#, github: 'Compass/compass-rails', branch: 'rails4'
+  gem 'compass-rails'
+  gem 'sprockets-rails'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
