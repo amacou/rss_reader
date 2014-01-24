@@ -19,15 +19,16 @@
 
 # Learn more: http://github.com/javan/whenever
 
-#set :output, "/path/to/my/cron_log.log"
+#env :PATH, ENV['PATH']
+
 job_type :rbenv_bundle_runner, "export PATH=\"$HOME/.rbenv/bin:$PATH\"; eval \"$(rbenv init -)\"; cd :path && bundle exec rails runner -e :environment ':task' :output"
-job_type :rvm_bundle_runner, "source \"$HOME/.rvm/scripts/rvm\" && rvm use 2.0 && cd :path && bundle exec rails runner -e :environment ':task' :output"
+job_type :rvm_bundle_runner, "source \"$HOME/.rvm/scripts/rvm\" && cd :path && bundle exec rails runner -e :environment ':task' :output"
 
 
 set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
 
 every 20.minutes do
-  rbenv_bundle_runner "Feed.pull_all", :environment => "development"
+  rbenv_bundle_runner "Feed.pull_all", :environment => "production"
 #  command "cd /Users/amacou/work/ror/rss_reader && /Users/amacou/.rbenv/shims/bundle exec rails runner -e development 'Feed.pull_all' >> log/cron.log 2>> log/error.log"
 #  runner "Feed.pull_all", :environment => "development"
 end
