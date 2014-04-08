@@ -4,22 +4,19 @@ gem 'rails', '~> 4.1.0.rc2'
 
 gem 'mysql2'
 
-group :assets do
+group :assets, :production do
   gem 'compass-rails'
   gem 'sprockets-rails'
   gem 'sass-rails', "~> 4.0.3"
   gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'font-awesome-rails'
 end
 
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'haml-rails'
 gem 'jbuilder'
-gem 'thin'
-
-group :development, :test do
-end
 
 group :development do
   gem 'pry-rails'
