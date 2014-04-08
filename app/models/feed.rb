@@ -47,13 +47,13 @@ class Feed < ActiveRecord::Base
     end
     t = Time.now
     begin
-      rss = Feedzirra::Feed.fetch_and_parse(self.xml_url, fetch_header)
+      rss = Feedjira::Feed.fetch_and_parse(self.xml_url, fetch_header)
       if rss && !rss.instance_of?(Fixnum)
         self.title = rss.title if rss.title && rss.title != self.title
         self.url = rss.url if rss.url && rss.url != self.url
         rss.entries = rss.entries.split(0..MAX_ENTRY_COUNT) if rss.entries.length > MAX_ENTRY_COUNT
         rss.entries.each do |item|
-          entry = self.entries.find_or_create_by(link: item.url) do |e|
+          self.entries.find_or_create_by(link: item.url) do |e|
             e.title = item.title
             e.link = item.url
             e.description = item.content || item.summary
