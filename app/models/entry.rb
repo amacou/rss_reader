@@ -1,8 +1,13 @@
 require 'time'
 class Entry < ActiveRecord::Base
   belongs_to :feed
+
   has_many :unread_entries, :dependent => :destroy
+
   after_create :create_unread_entries
+
+  scope :unread, -> { joins(:unread_entries).where(['unread_entries.readed=?',false])}
+
   def create_unread_entries
     self.feed.subscriptions.find_each do |sub|
       ue = sub.unread_entries.new
