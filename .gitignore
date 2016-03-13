@@ -21,4 +21,3 @@
 rerun.txt
 pickle-email-*.html
 /config/database.yml
-/Gemfile.lock
