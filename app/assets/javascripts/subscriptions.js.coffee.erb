@@ -1,8 +1,3 @@
-<% class SubscriptionsHelper; include AbstractController::Translation end %>
-<%= helper = SubscriptionsHelper.new %>
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
 inplace_edit_start = ->
   $('.rest-in-place-edit').restInPlace()
 
@@ -29,7 +24,7 @@ unsubscribe_button_init = ->
   unsubscribe_button.attr("disabled", null)
 
   unsubscribe_button.click( ->
-    if confirm('<%= helper.t('delete-confirm') %>')
+    if confirm('<%= I18n.t('delete-confirm') %>')
       form = $('form.subscriptions-unsubscribe')
       $('.unsubscribe_target').remove()
       $("input.subscription-check:checked").each( (index,input)->

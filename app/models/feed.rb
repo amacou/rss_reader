@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 require 'open-uri'
+
 class Feed < ActiveRecord::Base
   has_many :subscriptions
   has_many :entries
@@ -11,15 +11,27 @@ class Feed < ActiveRecord::Base
 
   def self.subscribe_from_url(url)
     feed = Feed.where(url: url).first
-
     unless feed
-      doc = Nokogiri::HTML(open(url))
+      connnection = Faraday.new(url: url)
+      response = connnection.get
+      unless response.success?
+        return nil
+      end
+
+      doc = Nokogiri::HTML(response.body)
+
       if doc.xpath("//head/link[@type='application/rss+xml']").length > 0
         rsslink = doc.xpath("//head/link[@type='application/rss+xml']")
         feed = Feed.new
         feed.url = url
         feed.title = rsslink.attr('title').to_s
-        feed.xml_url = rsslink.attr('href').to_s
+        xml_url = URI.parse(rsslink.attr('href').to_s)
+        unless xml_url.host
+          xml_url = URI.parse(url)
+          xml_url.path = rsslink.attr('href').to_s
+        end
+
+        feed.xml_url = xml_url.to_s
         feed.feed_type = 'rss'
         feed.save
       else
@@ -47,7 +59,7 @@ class Feed < ActiveRecord::Base
     end
     t = Time.now
     begin
-      rss = Feedjira::Feed.fetch_and_parse(self.xml_url, fetch_header)
+      rss = Feedjira::Feed.fetch_and_parse(self.xml_url)
       if rss && !rss.instance_of?(Fixnum)
         self.title = rss.title if rss.title && rss.title != self.title
         self.url = rss.url if rss.url && rss.url != self.url
@@ -71,6 +83,7 @@ class Feed < ActiveRecord::Base
       self.save
     rescue => e
       puts "******Error******"
+      puts e
       Rails.logger.error e
       after_pull_error
     end

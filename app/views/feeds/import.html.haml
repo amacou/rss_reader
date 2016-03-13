@@ -2,10 +2,9 @@
   %li
     = link_to t('Subscriptions'), subscriptions_path, class: "red"
   %li
-    = link_to t('Folders'), folders_path, class:"blue active"
+    = link_to t('Folders'), folders_path, class:"blue"
   %li
-    = link_to t('Import_Export'), import_feeds_path, class:"green"
-
+    = link_to t('Import_Export'), import_feeds_path, class:"green active"
 %div
   %h2= t('import_feed')
   = form_tag(upload_feeds_path,:multipart => true) do
@@ -16,4 +15,4 @@
   = link_to t('export_feed'), export_feeds_path
 %div
   %h2= t('bookmarklet')
-= link_to "BookMarklet", "javascript:location.href='http://#{}/subscribe/'+location.href"
+  = link_to "BookMarklet", "javascript:location.href='#{request.protocol}://#{request.host_with_port}/subscribe/'+location.href"

@@ -8,23 +8,25 @@ show_entries = ->
 
 open_in_background = ()->
   active_entry = $('#entries > .entry.active')
-  os_is_not_windows = navigator.platform.indexOf("Win") == -1
+  os_is_windows = navigator.platform.indexOf("Win") != -1
   userAgent = navigator.userAgent.toLowerCase()
   link = active_entry.find('.entry-title a')
-  if userAgent.indexOf('chrome') != -1  || userAgent.indexOf('safari') != -1
-    mouse_event = document.createEvent("MouseEvents")
-    mouse_event.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, !os_is_not_windows, false, false, os_is_not_windows, 0, null)
-    link[0].dispatchEvent(mouse_event) if link.length > 0
-  else
-    url = link.attr('href')
-    window.open(url)
+  mouse_event = new MouseEvent('click', {
+    metaKey: !os_is_windows,
+    ctrlKey: os_is_windows,
+    view: window,
+  });
+
+  if link.length > 0
+    if link[0].dispatchEvent(mouse_event)
+      window.open(link[0].href)
+  return false
 
 read_next_entry = ()->
   active_entry = $('#entries > .entry.active')
   if active_entry.length == 0
     active_entry = $('#entries > .entry:first');
   else
-  #          active_entry.removeClass(active_class);
     active_entry = active_entry.next();
     entry_active(active_entry);
 
@@ -35,7 +37,6 @@ read_prev_entry = ()->
       active_entry = $('#entries > .entry:first')
       active_offset = 0
     else
-      #            active_entry.removeClass(active_class);
       active_entry = active_entry.prev();
       entry_active(active_entry);
 
@@ -56,7 +57,7 @@ start_key_listen = ->
 
     switch e.keyCode
       when 86
-      #v
+       #v
        open_in_background();
       when 74
         #j
