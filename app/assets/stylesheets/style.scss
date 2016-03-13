@@ -308,16 +308,10 @@ display:none;
 @media #{$smartphone} {
 #controll-bar{
   display:block;
-  /* float:right; */
   position:fixed;
   right:0px;
   top:0px;
-  /* bottom:0px; */
-  /* right:0px; */
-  @include display-box;
-  @include box-orient(horizontal);
-  @include box-align(stretch);
-  @include box-direction(reverse);  display: flex;
+  @include display-flex();
   background-color:#1DA075;
   @include opacity(0.8);
   width:100%;
@@ -327,7 +321,6 @@ display:none;
   min-height:40px;
   margin:0 5px;
   text-align:center;
-  @include box-flex(1);
   i{
     margin-top:5px;
   }
