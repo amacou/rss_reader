@@ -15,4 +15,4 @@
   = link_to t('export_feed'), export_feeds_path
 %div
   %h2= t('bookmarklet')
-= link_to "BookMarklet", "javascript:location.href='http://#{}/subscribe/'+location.href"
+  = link_to "BookMarklet", "javascript:location.href='#{request.protocol}://#{request.host_with_port}/subscribe/'+location.href"
