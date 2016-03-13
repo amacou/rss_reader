@@ -11,6 +11,13 @@ open_in_background = ()->
   os_is_windows = navigator.platform.indexOf("Win") != -1
   userAgent = navigator.userAgent.toLowerCase()
   link = active_entry.find('.entry-title a')
+  ua = window.navigator.userAgent.toLowerCase();
+  if ua.indexOf('firefox') != -1 {
+    if link.length > 0
+      window.open(link[0].href)
+    return false
+  }
+
   mouse_event = new MouseEvent('click', {
     metaKey: !os_is_windows,
     ctrlKey: os_is_windows,
@@ -19,7 +26,6 @@ open_in_background = ()->
 
   if link.length > 0
     if link[0].dispatchEvent(mouse_event)
-      window.open(link[0].href)
   return false
 
 read_next_entry = ()->
