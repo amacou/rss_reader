@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.0.rc2'
+gem 'rails', '~> 4.2.6'
 
 gem 'mysql2'
 
 group :assets, :production do
   gem 'compass-rails'
   gem 'sprockets-rails'
-  gem 'sass-rails', "~> 4.0.3"
+  gem 'sass-rails'
   gem 'coffee-rails'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier'
   gem 'font-awesome-rails'
 end
 
@@ -29,6 +29,7 @@ group :test do
   gem "rspec-rails"
   gem 'factory_girl_rails'
   gem 'rr'
+  gem 'sqlite3'
 end
 
 gem 'omniauth'
