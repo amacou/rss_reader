@@ -31,6 +31,7 @@ group :test do
   gem 'rr'
   gem 'sqlite3'
 end
+
 gem 'faraday'
 gem 'omniauth'
 gem 'omniauth-twitter'
