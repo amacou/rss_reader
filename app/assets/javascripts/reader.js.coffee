@@ -8,16 +8,11 @@ show_entries = ->
 
 open_in_background = ()->
   active_entry = $('#entries > .entry.active')
-  os_is_not_windows = navigator.platform.indexOf("Win") == -1
+  os_is_windows = navigator.platform.indexOf("Win") != -1
   userAgent = navigator.userAgent.toLowerCase()
   link = active_entry.find('.entry-title a')
-  if userAgent.indexOf('chrome') != -1  || userAgent.indexOf('safari') != -1
-    mouse_event = document.createEvent("MouseEvents")
-    mouse_event.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, !os_is_not_windows, false, false, os_is_not_windows, 0, null)
-    link[0].dispatchEvent(mouse_event) if link.length > 0
-  else
-    url = link.attr('href')
-    window.open(url)
+  mouse_event = new MouseEvent('click', { metaKey: !os_is_windows, ctrlKey: os_is_windows });
+  link[0].dispatchEvent(mouse_event) if link.length > 0
 
 read_next_entry = ()->
   active_entry = $('#entries > .entry.active')
