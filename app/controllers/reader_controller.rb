@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 class ReaderController < ApplicationController
   before_filter :authenticate
+
   layout 'reader'
+
   def index
-    prev_weight = params[:t]
-    @entries = Entry.joins(:unread_entries).where(['unread_entries.user_id=?',current_user.id]).where(['unread_entries.readed=?',false]).includes(:feed).order("unread_entries.weight #{current_user.sort_type}")
-    if prev_weight
+    @entries = current_user.entries.unread.order("unread_entries.weight #{current_user.sort_type}").includes(:feed)
+
+    if prev_weight = params[:t]
       if current_user.sort_type == User::SORT_TYPE_DESC
         @entries = @entries.where(['unread_entries.weight < ? ',prev_weight])
       else
@@ -16,7 +18,7 @@ class ReaderController < ApplicationController
   end
 
   def readed
-    UnreadEntry.where(user_id: current_user.id, entry_id: params[:id]).limit(1).update_all(readed: true)
+    current_user.unread_entries.where(entry_id: params[:id]).limit(1).update_all(readed: true)
     render :nothing => true
   end
 end
