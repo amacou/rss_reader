@@ -258,6 +258,7 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   factory_girl_rails
+  faraday
   feedjira
   font-awesome-rails
   haml-rails

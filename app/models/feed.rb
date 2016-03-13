@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 require 'open-uri'
+
 class Feed < ActiveRecord::Base
   has_many :subscriptions
   has_many :entries
@@ -13,7 +13,14 @@ class Feed < ActiveRecord::Base
     feed = Feed.where(url: url).first
 
     unless feed
-      doc = Nokogiri::HTML(open(url))
+      connnection = Faraday.new(url: url)
+      response = connnection.get
+      unless response.success?
+        return nil
+      end
+
+      doc = Nokogiri::HTML(response.body)
+
       if doc.xpath("//head/link[@type='application/rss+xml']").length > 0
         rsslink = doc.xpath("//head/link[@type='application/rss+xml']")
         feed = Feed.new
