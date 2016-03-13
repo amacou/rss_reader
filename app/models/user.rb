@@ -15,29 +15,4 @@ class User < ActiveRecord::Base
       user.sort_type = SORT_TYPE_DESC
     end
   end
-
-  def subscribe(url)
-    subscription = self.subscriptions.joins(:feed).where('feeds.url'=> url).first
-    unless subscription
-      subscription = self.subscriptions.build
-    end
-
-
-    if feed = Feed.subscribe_from_url(url)
-      subscription.feed = feed
-      subscription.load_unread_entry if subscription.save
-      return true
-    end
-
-    return false
-  end
-
-  def unsubscribe(subsctiptions)
-    subscription_table = Subscription.arel_table
-    subscriptions = current_user.subscriptions.where(subscription_table[:id].in(subscription_ids))
-    subscriptions.each do |subscription|
-      subscription.destroy
-    end
-
-  end
 end
