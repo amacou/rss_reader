@@ -11,7 +11,6 @@ class Feed < ActiveRecord::Base
 
   def self.subscribe_from_url(url)
     feed = Feed.where(url: url).first
-
     unless feed
       connnection = Faraday.new(url: url)
       response = connnection.get
@@ -26,7 +25,13 @@ class Feed < ActiveRecord::Base
         feed = Feed.new
         feed.url = url
         feed.title = rsslink.attr('title').to_s
-        feed.xml_url = rsslink.attr('href').to_s
+        xml_url = URI.parse(rsslink.attr('href').to_s)
+        unless xml_url.host
+          xml_url = URI.parse(url)
+          xml_url.path = rsslink.attr('href').to_s
+        end
+
+        feed.xml_url = xml_url.to_s
         feed.feed_type = 'rss'
         feed.save
       else
@@ -78,6 +83,7 @@ class Feed < ActiveRecord::Base
       self.save
     rescue => e
       puts "******Error******"
+      puts e
       Rails.logger.error e
       after_pull_error
     end
