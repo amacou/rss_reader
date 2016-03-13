@@ -15,13 +15,4 @@ class User < ActiveRecord::Base
       user.sort_type = SORT_TYPE_DESC
     end
   end
-
-  def unsubscribe(subsctiptions)
-    subscription_table = Subscription.arel_table
-    subscriptions = current_user.subscriptions.where(subscription_table[:id].in(subscription_ids))
-    subscriptions.each do |subscription|
-      subscription.destroy
-    end
-
-  end
 end
