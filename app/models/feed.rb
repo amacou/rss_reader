@@ -47,7 +47,7 @@ class Feed < ActiveRecord::Base
     end
     t = Time.now
     begin
-      rss = Feedjira::Feed.fetch_and_parse(self.xml_url, fetch_header)
+      rss = Feedjira::Feed.fetch_and_parse(self.xml_url)
       if rss && !rss.instance_of?(Fixnum)
         self.title = rss.title if rss.title && rss.title != self.title
         self.url = rss.url if rss.url && rss.url != self.url
