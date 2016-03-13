@@ -19,8 +19,18 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscribe
+    url = params[:url]
+    subscription = current_user.subscriptions.joins(:feed).where('feeds.url' => url).first
+    unless subscription
+      subscription = current_user.subscriptions.build unless subscription
+      if feed = Feed.subscribe_from_url(url)
+        subscription.feed = feed
+        subscription.load_unread_entry if subscription.save
+      end
+    end
+
     respond_to do |format|
-      if current_user.subscribe(params[:url])
+      if subscription.persisted?
         format.html { redirect_to subscriptions_url, notice: 'rss feed was successfully add.' }
         format.json { head :no_content }
       else
