@@ -8,19 +8,18 @@ show_entries = ->
 
 open_in_background = ()->
   active_entry = $('#entries > .entry.active')
+  link = active_entry.find('.entry-title a')
+
   os_is_windows = navigator.platform.indexOf("Win") != -1
   userAgent = navigator.userAgent.toLowerCase()
-  link = active_entry.find('.entry-title a')
-  ua = navigator.userAgent.toLowerCase()
 
-  if ua.indexOf('firefox') != -1 && link.length > 0
+  if userAgent.indexOf('firefox') != -1 && link.length > 0
     window.open(link[0].href)
     return false
 
   mouse_event = new MouseEvent('click', {
     metaKey: !os_is_windows,
     ctrlKey: os_is_windows,
-    view: window,
   });
 
   if link.length > 0
