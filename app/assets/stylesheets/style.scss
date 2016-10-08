@@ -367,25 +367,18 @@ font-size:$mobile-font-scale;
     .entry{
         .entry-title{
             font-size: $mobile-font-scale;
-            /* font-size:16px; */
-            /* line-height:20px; */
         }
         .entry-published, .entry-source, .entry-author{
-            /* font-size:16px; */
             font-size:$mobile-font-scale;
-            /* line-height:20px; */
         }
         &.active{
             .entry-title{
                 font-size:$mobile-font-scale;
-                /* font-size:20px; */
             }
             .entry-content{
                 font-size:$mobile-font-scale;
                 *{
                   font-size:$mobile-font-scale;
-                  /* font-size:14px; */
-                  /* line-height:18px; */
                 }
             }
         }
