@@ -3,28 +3,17 @@ class FoldersController < ApplicationController
   before_action :authenticate
   before_action :set_folder, only: [:show, :edit, :update, :destroy]
 
-  # GET /folders
-  # GET /folders.json
   def index
     @folders = current_user.folders.all
   end
 
-  # GET /folders/1.json
-  def show
-    @folder
-  end
-
-  # GET /folders/new
   def new
     @folder = Folder.new
   end
 
-  # GET /folders/1/edit
   def edit
   end
 
-  # POST /folders
-  # POST /folders.json
   def create
     @folder = Folder.new(folder_params)
     @folder.user = current_user
@@ -39,8 +28,6 @@ class FoldersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /folders/1
-  # PATCH/PUT /folders/1.json
   def update
     respond_to do |format|
       if @folder.update(folder_params)
@@ -53,8 +40,6 @@ class FoldersController < ApplicationController
     end
   end
 
-  # DELETE /folders/1
-  # DELETE /folders/1.json
   def destroy
     @folder.destroy
     respond_to do |format|
@@ -64,13 +49,11 @@ class FoldersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_folder
-      @folder = Folder.where(id:params[:id], user_id: current_user.id).first
-    end
+  def set_folder
+    @folder = Folder.where(id:params[:id], user_id: current_user.id).first
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def folder_params
-      params.require(:folder).permit(:name)
-    end
+  def folder_params
+    params.require(:folder).permit(:name)
+  end
 end
