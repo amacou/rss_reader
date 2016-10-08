@@ -1,5 +1,6 @@
 require 'builder/xmlmarkup'
 class FeedsController < ApplicationController
+  layout 'setting'
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
 
   def subscribe
@@ -74,28 +75,21 @@ class FeedsController < ApplicationController
     :type => 'text/xml',
     :disposition => "attachment; filename=export.xml"
   end
-  # GET /feeds
-  # GET /feeds.json
+
   def index
     @feeds = Feed.all
   end
 
-  # GET /feeds/1
-  # GET /feeds/1.json
   def show
   end
 
-  # GET /feeds/new
   def new
     @feed = Feed.new
   end
 
-  # GET /feeds/1/edit
   def edit
   end
 
-  # POST /feeds
-  # POST /feeds.json
   def create
     @feed = Feed.new(feed_params)
 
@@ -110,8 +104,6 @@ class FeedsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /feeds/1
-  # PATCH/PUT /feeds/1.json
   def update
     respond_to do |format|
       if @feed.update(feed_params)
@@ -124,8 +116,6 @@ class FeedsController < ApplicationController
     end
   end
 
-  # DELETE /feeds/1
-  # DELETE /feeds/1.json
   def destroy
     @feed.destroy
     respond_to do |format|
@@ -135,13 +125,11 @@ class FeedsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feed
-      @feed = Feed.find(params[:id])
-    end
+  def set_feed
+    @feed = Feed.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def feed_params
-      params.require(:feed).permit(:title, :url, :xml_url, :feed_type, :last_checked_at)
-    end
+  def feed_params
+    params.require(:feed).permit(:title, :url, :xml_url, :feed_type, :last_checked_at)
+  end
 end
