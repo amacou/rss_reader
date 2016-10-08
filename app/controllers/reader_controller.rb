@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 class ReaderController < ApplicationController
-  before_filter :authenticate
-
+  before_action :authenticate
   layout 'reader'
 
   def index

@@ -1,4 +1,17 @@
-@import "compass";
+@mixin clearfix {
+  *zoom: 1;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
 $color-turquoise: #1abc9c;
 $color-greensea: #16a085;
 $color-emerland: #2ecc71;
@@ -103,9 +116,8 @@ img{
 }
 
 .notice{
-    @include border-radius( 4px 4px 4px 4px);
+    @include border-radius(4px);
     padding: 8px 35px 8px 14px;
-    @include text-shadow(0 1px 0 rgba(255, 255, 255, 0.5));
     margin: 5px 0;
 }
 .info{
@@ -157,7 +169,7 @@ img{
     height:20px;
 }
 #entries{
-    @include border-radius(4px, 4px);
+    @include border-radius(4px);
     overflow-x: visible;
     overflow-y: auto;
     position: relative;
@@ -311,9 +323,9 @@ display:none;
   position:fixed;
   right:0px;
   top:0px;
-  @include display-flex();
+  display:flex;
   background-color:#1DA075;
-  @include opacity(0.8);
+  opacity: 0.8;
   width:100%;
 }
 .controll-button{

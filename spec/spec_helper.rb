@@ -8,8 +8,8 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 OmniAuth.config.test_mode = true
 
-def logged_in(controller)
-  stub(controller).current_user{FactoryGirl.create(:user)}
+def login(user)
+  allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 end
 
 RSpec.configure do |config|
@@ -19,7 +19,7 @@ RSpec.configure do |config|
   #
   # config.mock_with :mocha
   # config.mock_with :flexmock
-  config.mock_with :rr
+  # config.mock_with :rr
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -39,4 +39,6 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  config.include FactoryGirl::Syntax::Methods
 end

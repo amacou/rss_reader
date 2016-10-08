@@ -1,7 +1,5 @@
 class SettingsController < ApplicationController
-
   def show
-
   end
 
   def update
@@ -15,9 +13,9 @@ class SettingsController < ApplicationController
       end
     end
   end
+
   private
   def setting_params
     params.require(:user).permit(:sort_type)
   end
-
 end

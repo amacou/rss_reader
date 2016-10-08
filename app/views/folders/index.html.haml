@@ -1,19 +1,7 @@
-%ul.tab
-  %li
-    = link_to t('Subscriptions'), subscriptions_path, class: "red"
-  %li
-    = link_to t('Folders'), folders_path, class:"blue active"
-  %li
-    = link_to t('Import_Export'), import_feeds_path, class:"green"
-
-  %li
-    = link_to t('Import_Export'), import_feeds_path, class:"green"
-
-
 = link_to t('new-folder'), new_folder_path
 %table
   %tr
-    %th= t('Name')
+    %th= t('name')
     %th
 
   - @folders.each do |folder|

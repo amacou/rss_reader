@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title RSS Reader
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    %meta{:name => "viewport", :content => "width=device-width,initial-scale=1.0"}
+    = csrf_meta_tags
+  %body
+    = render :partial => "topbar"
+    .container#wide-container
+      - if flash[:notice]
+        .notice.info= flash[:notice]
+      - if flash[:warning]
+        .notice.warning= flash[:warning]
+      - if flash[:error]
+        .notice.error= flash[:error]
+      = render 'shared/setting_tabs'
+      = yield

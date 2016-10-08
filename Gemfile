@@ -1,17 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.6'
+gem 'rails', '~> 5.0.0.1'
 
 gem 'mysql2'
-
-group :assets, :production do
-  gem 'compass-rails'
-  gem 'sprockets-rails'
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-  gem 'font-awesome-rails'
-end
 
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -42,3 +33,8 @@ gem 'feedjira'
 gem 'whenever', :require => false
 gem 'parallel'
 gem 'rest_in_place'
+gem 'sprockets-rails'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'font-awesome-sass', '~> 4.6.2'
