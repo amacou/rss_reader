@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  layout 'setting'
   before_filter :authenticate
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
 

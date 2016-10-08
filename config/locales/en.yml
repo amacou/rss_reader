@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  all : 'All'
+  name : 'Name'
+  selected : 'selected'
+  folders : 'Folders'
   here : "Here"
   welcome: "Welcome, "
   home: "Home"
@@ -30,6 +34,7 @@ en:
   entry: "entry"
   import_feed: "Import Subscription Feeds"
   export_feed: "Export Subscription Feeds"
+  import_export: "Inport or Export Subscription Feeds"
   sign_in_with_twitter: "Sign in with Twitter"
   noting_subscriptions: "You should subscription feed first"
   noting_unread_entries: "Your reading list has no unread entries (*ﾟ▽ﾟ)ﾉ"
