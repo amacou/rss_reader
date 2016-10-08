@@ -25,10 +25,13 @@ class FeedsController < ApplicationController
       end
       subscription.load_unread_entry
     end
+
+    redirect_to ({action: :import}), notice: 'imported!'
   end
 
   def export
-    @feeds = current_user.feeds.all
+    @subscriptions = current_user.subscriptions.includes(:feed).where(folder: nil)
+    @folders = current_user.folders
     @xml = ""
     xml = Builder::XmlMarkup.new(:target => @xml, :indent => 2)
     xml.instruct!
@@ -38,24 +41,34 @@ class FeedsController < ApplicationController
       end
       xml.body do
         @folders.each do |folder|
-          xml.outline({
-                        :title => folder.name,
-                        :text => folder.name,
-                      }){
+          xml.outline(
+            title: folder.name,
+            text: folder.name,
+          ){
             folder.feeds.each do |feed|
-              xml.outline({
-                            :type => 'rss',
-                            :version => 'RSS',
-                            :description => '',
-                            :title => feed.title,
-                            :htmlUrl => feed.url,
-                            :xmlUrl => feed.xml_url
-                          })
+              xml.outline(
+                type: 'rss',
+                version: 'RSS',
+                description: '',
+                title: feed.title,
+                htmlUrl: feed.url,
+                xmlUrl: feed.xml_url
+              )
             end
           }
-
+        end
+        @subscriptions.each do |subscription|
+          xml.outline(
+            :type => 'rss',
+            :version => 'RSS',
+            :description => '',
+            :title => subscription.feed.title,
+            :htmlUrl => subscription.feed.url,
+            :xmlUrl => subscription.feed.xml_url
+          )
         end
       end
     end
+    send_data @xml, :type => 'text/xml', :disposition => "attachment; filename=export.xml"
   end
 end
