@@ -3,14 +3,10 @@ class SettingsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if current_user.update(setting_params)
-        format.html { redirect_to :setting, notice: 'Setting was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to :setting, notice: "Setting was failed updated." }
-        format.json { render json: current_user.errors, status: :unprocessable_entity }
-      end
+    if current_user.update(setting_params)
+       redirect_to :setting, notice: 'Setting was successfully updated.'
+    else
+      redirect_to :setting, notice: "Setting was failed updated."
     end
   end
 
