@@ -247,6 +247,7 @@ img{
                 line-height:18px;
                 }
                 display:block;
+                blockquote { margin: 5px; }
             }
         }
     }
@@ -376,7 +377,6 @@ font-size:$mobile-font-scale;
                 font-size:$mobile-font-scale;
             }
             .entry-content{
-                blockquote { margin: 5px; }
                 font-size:$mobile-font-scale;
                 *{
                   font-size:$mobile-font-scale;
