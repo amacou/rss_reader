@@ -16,7 +16,6 @@
 //= require jquery.autopager-1.0.0
 //= require timeago
 //= require locales/timeago.ja
-//= require reader
 //= require subscriptions
 //= require rest_in_place
 //= require init

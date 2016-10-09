@@ -24,3 +24,4 @@
             =raw "#{t('unread')} <span id='total-count'>#{@entries.total_count}</span> #{t('entry')}"
 
       = yield
+      = javascript_include_tag "reader", "data-turbolinks-track" => true
